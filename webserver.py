@@ -14,16 +14,16 @@
          if (disabled)
              return;
 
-         // When a new client connects, the server constructs a QTcpSocket and all
-         // communication with the client is done over this QTcpSocket. QTcpSocket
+         // When a new client connects, the server constructs a TcpSocket and all
+         // communication with the client is done over this TcpSocket. TcpSocket
          // works asynchronously, this means that all the communication is done
          // in the two slots readClient() and discardClient().
          QTcpSocket* s = new QTcpSocket(this);
-         connect(s, SIGNAL(readyRead()), this, SLOT(readClient()));
-         connect(s, SIGNAL(disconnected()), this, SLOT(discardClient()));
+         connect(s, SIGNAL(readyRead()), this, SLOT(readClient())); //check if we have the signal ready or not
+         connect(s, SIGNAL(disconnected()), this, SLOT(discardClient())); 
          s->setSocketDescriptor(socket);
 
-         QtServiceBase::instance()->logMessage("New Connection");
+         QtServiceBase::instance()->logMessage("New Connection"); //log the message for the signal connection established
      }
 
      void pause()
@@ -62,7 +62,7 @@
 
                  if (socket->state() == QTcpSocket::UnconnectedState) {
                      delete socket;
-                     QtServiceBase::instance()->logMessage("Connection closed");
+                     QtServiceBase::instance()->logMessage("Connection closed"); //connection is closed
                  }
              }
          }
