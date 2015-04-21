@@ -26,7 +26,7 @@
          QtServiceBase::instance()->logMessage("New Connection"); //log the message for the signal connection established
      }
 
-     void pause()
+     void pause() //Paused state for the request.
      {
          disabled = true;
      }
